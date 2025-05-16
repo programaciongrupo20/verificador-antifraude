@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verificador Antifraude</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🛡️ Verificador de Enlaces Sospechosos</h1>
+  <p>Ingresa un enlace para verificar si puede ser fraudulento:</p>
+  <input type="text" id="urlInput" placeholder="https://ejemplo.com"/>
+  <button onclick="verificarURL()">Verificar</button>
+  
+  <div id="resultado"></div>
+
+  <h2>🔍 Escaneo de palabras peligrosas</h2>
+  <textarea id="textoInput" rows="6" placeholder="Pega aquí el texto sospechoso..."></textarea>
+  <button onclick="resaltarPalabras()">Analizar</button>
+
+  <div id="textoResultado"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
