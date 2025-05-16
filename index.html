@@ -2,24 +2,82 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Verificador Antifraude</title>
-  <link rel="stylesheet" href="style.css">
+  <title>🛡️ Verificador de Enlaces Sospechosos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    textarea, input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
 </head>
 <body>
+
   <h1>🛡️ Verificador de Enlaces Sospechosos</h1>
-  <p>Ingresa un enlace para verificar si puede ser fraudulento:</p>
-  <input type="text" id="urlInput" placeholder="https://ejemplo.com"/>
-  <button onclick="verificarURL()">Verificar</button>
   
-  <div id="resultado"></div>
+  <label for="enlace">Ingresa un enlace para verificar si puede ser fraudulento:</label>
+  <input type="text" id="enlace" placeholder="https://ejemplo.com">
+  <button onclick="verificarEnlace()">Verificar</button>
+
+  <hr>
 
   <h2>🔍 Escaneo de palabras peligrosas</h2>
-  <textarea id="textoInput" rows="6" placeholder="Pega aquí el texto sospechoso..."></textarea>
-  <button onclick="resaltarPalabras()">Analizar</button>
+  <label for="texto">Pega aquí el texto sospechoso...</label>
+  <textarea id="texto" rows="5"></textarea>
+  <button onclick="analizarTexto()">Analizar</button>
 
-  <div id="textoResultado"></div>
+  <script>
+    const palabrasPeligrosas = [
+      "urgente", "verifica", "gratis", "regalo", "premio", "felicidades",
+      "click aquí", "haga clic", "inicie sesión", "actualiza", "actualización",
+      "confirmar cuenta", "bloqueada", "cuenta suspendida", "problema con su cuenta",
+      "seguridad", "acceso no autorizado", "clave", "contraseña", "pago fallido",
+      "transacción fallida", "factura pendiente", "soporte técnico", "reembolso",
+      "bonificación", "dinero fácil", "transferencia", "banco", "tarjeta de crédito",
+      "número de tarjeta", "verificación de identidad", "responde ahora", "no ignores",
+      "última oportunidad", "acceso inmediato", "oferta limitada", "sorteo", "ganador",
+      "confirma ahora", "datos personales", "haz clic abajo", "información sensible",
+      "inicio de sesión", "correo no verificado", "vencimiento", "recupera tu cuenta",
+      "te han hackeado", "hemos detectado", "resetea tu contraseña"
+    ];
 
-  <script src="script.js"></script>
+    function analizarTexto() {
+      const texto = document.getElementById("texto").value.toLowerCase();
+      const detectadas = palabrasPeligrosas.filter(p => texto.includes(p));
+
+      if (detectadas.length > 0) {
+        alert("⚠️ Se detectaron palabras sospechosas:\n\n" + detectadas.join(", "));
+      } else {
+        alert("✅ No se detectaron palabras sospechosas.");
+      }
+    }
+
+    function verificarEnlace() {
+      const enlace = document.getElementById("enlace").value.toLowerCase();
+      if (enlace.includes("login") || enlace.includes("verifica") || enlace.includes("regalo")) {
+        alert("⚠️ El enlace contiene posibles palabras sospechosas.");
+      } else {
+        alert("✅ El enlace no parece contener palabras peligrosas.");
+      }
+    }
+  </script>
 </body>
 </html>
